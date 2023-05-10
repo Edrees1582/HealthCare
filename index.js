@@ -23,6 +23,10 @@ app.engine('ejs', ejsMate);
 
 app.set('view engine', 'ejs');
 
+app.get('/', (req, res) => {
+  res.redirect('diseases');
+});
+
 app.get('/diseases', diseaseController.index);
 
 app.get('/diseases/:disease', diseaseController.show);
