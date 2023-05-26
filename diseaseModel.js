@@ -11,6 +11,7 @@ const DiseaseSchema = new mongoose.Schema({
   },
   causes: [String],
   mostAffectedAge: String,
+  age: [String], //enum: ['baby', 'child', 'adult', 'elderly']
   prevention: [String],
   diet: [String],
   treatmentCenter: [String],

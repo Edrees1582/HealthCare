@@ -14,6 +14,7 @@ DiseaseModel.insertMany([
     info: ``,
     causes: [``],
     mostAffectedAge: ``,
+    age: [``], // enum: ['baby', 'child', 'adult', 'elderly']
     prevention: [``],
     diet: [``],
     treatmentCenter: [``],

@@ -6,6 +6,7 @@ const uri =
   'mongodb+srv://edreesashab:m3hCyKULoiLlQCsl@healthcare.4d8v0tg.mongodb.net/?retryWrites=true&w=majority&ssl=true';
 const mongoose = require('mongoose');
 const diseaseController = require('./diseaseController');
+const Disease = require('./diseaseModel');
 
 const PORT = 1582;
 
@@ -23,9 +24,30 @@ app.engine('ejs', ejsMate);
 
 app.set('view engine', 'ejs');
 
+app.get('/', (req, res) => {
+  res.redirect('/home');
+});
+
+app.get('/home', (req, res) => {
+  res.render('home');
+});
+
 app.get('/diseases', diseaseController.index);
 
 app.get('/diseases/:disease', diseaseController.show);
+
+app.get('/age', async (req, res) => {
+  try {
+    let diseases = await Disease.find({});
+    res.render('age', { diseases });
+  } catch (error) {
+    res.send(error);
+  }
+});
+
+app.get('/calculations', (req, res) => {
+  res.render('calculations');
+});
 
 app.listen(PORT, () => {
   console.log(`server up on port ${PORT}`);

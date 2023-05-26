@@ -1,0 +1,778 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculations</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
+      @import url('https://fonts.googleapis.com/css?family=Montserrat');
+      body {
+        margin: 0;
+
+        background-color: lightblue;
+        width: 100%;
+        height: 100%;
+        background-position: 0px 70px;
+        background-size: auto;
+      }
+      /*   header CSS Code */
+      .container {
+        display: flex;
+        /*   border:1px solid red; */
+        height: 100%;
+        align-items: center;
+        position: absolute;
+        left: 70px;
+      }
+
+      input {
+        width: 200px;
+      }
+      header img {
+        height: 100px; /* Set logo height */
+        padding: 10px; /* Add padding around logo */
+      }
+      svg {
+        display: block;
+        font: 10.5em 'Montserrat';
+        width: 400px;
+        height: 200px;
+        margin: 0 auto;
+      }
+
+      .text-copy {
+        fill: none;
+        stroke: white;
+        stroke-dasharray: 6% 29%;
+        stroke-width: 8px;
+        stroke-dashoffset: 0%;
+        animation: stroke-offset 6.5s infinite linear;
+      }
+
+      .text-copy:nth-child(1) {
+        stroke: #1081eb;
+        animation-delay: -1;
+      }
+
+      .text-copy:nth-child(2) {
+        stroke: #1081eb;
+        animation-delay: -2s;
+      }
+
+      .text-copy:nth-child(3) {
+        stroke: #1081eb;
+        animation-delay: -3s;
+      }
+
+      .text-copy:nth-child(4) {
+        stroke: #1081eb;
+        animation-delay: -4s;
+      }
+
+      .text-copy:nth-child(5) {
+        stroke: #1081eb;
+        animation-delay: -5s;
+      }
+      .text-copy:nth-child(6) {
+        stroke: #1081eb;
+        animation-delay: -6s;
+      }
+      .text-copy:nth-child(7) {
+        stroke: #1081eb;
+        animation-delay: -7s;
+      }
+
+      @keyframes stroke-offset {
+        100% {
+          stroke-dashoffset: -35%;
+        }
+      }
+      /*   form type */
+      form {
+        font-size: 30px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        width: 100%;
+        padding: 5px;
+        padding-bottom: 20px;
+      }
+      label {
+        font-size: 20px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        size: 30px;
+        padding: 2px;
+      }
+      h2 {
+        font-size: 44px;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        width: 100%;
+        background-color: #5edaf0;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Lato', sans-serif;
+        font-family: 'Oswald', sans-serif;
+      }
+      /*   menu CSS Code */
+      .wrapper {
+        position: fixed;
+        top: 0;
+        /*left: -100%;*/
+        right: -100%;
+        height: 100%;
+        width: 100%;
+        background-image: url(https://wallpapercave.com/wp/wp6938542.jpg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+
+        /*   time of transition */
+        transition: all 0.6s ease-in-out;
+      }
+      #active:checked ~ .wrapper {
+        /*left: 0;*/
+        right: 0;
+      }
+      .menu-btn {
+        position: absolute;
+        z-index: 2;
+        right: 20px;
+        /*left: 20px; */
+        top: 20px;
+        height: 50px;
+        width: 50px;
+        text-align: center;
+        line-height: 50px;
+        border-radius: 50%;
+        font-size: 20px;
+        cursor: pointer;
+        /*color: #fff;*/
+        /*background: linear-gradient(90deg, #f92c78, #4114a1);*/
+        /* background: linear-gradient(375deg, #1cc7d0, #2ede98); */
+        /* background: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%); */
+        transition: all 0.3s ease-in-out;
+      }
+      .menu-btn span,
+      .menu-btn:before,
+      .menu-btn:after {
+        content: '';
+        position: absolute;
+        top: calc(50% - 1px);
+        left: 30%;
+        width: 40%;
+        border-bottom: 2px solid #000;
+        transition: transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+      }
+      .menu-btn:before {
+        transform: translateY(-8px);
+      }
+      .menu-btn:after {
+        transform: translateY(8px);
+      }
+
+      .close {
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        transition: background 0.6s;
+      }
+
+      /* closing animation */
+      #active:checked + .menu-btn span {
+        transform: scaleX(0);
+      }
+      #active:checked + .menu-btn:before {
+        transform: rotate(45deg);
+        border-color: #fff;
+      }
+      #active:checked + .menu-btn:after {
+        transform: rotate(-45deg);
+        border-color: #fff;
+      }
+      .wrapper ul {
+        position: absolute;
+        top: 60%;
+        left: 50%;
+        height: 90%;
+        transform: translate(-50%, -50%);
+        list-style: none;
+        text-align: center;
+      }
+      .wrapper ul li {
+        height: 10%;
+        margin: 15px 0;
+      }
+      .wrapper ul li a {
+        text-decoration: none;
+        font-size: 30px;
+        font-weight: 500;
+        padding: 5px 30px;
+        color: #fff;
+        border-radius: 50px;
+        position: absolute;
+        line-height: 50px;
+        margin: 5px 30px;
+        opacity: 0;
+        transition: all 0.3s ease;
+        transition: transform 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+      }
+      .wrapper ul li a:after {
+        position: absolute;
+        content: '';
+        background: #fff;
+        /*background: linear-gradient(#14ffe9, #ffeb3b, #ff00e0);*/
+        /*background: linear-gradient(375deg, #1cc7d0, #2ede98);*/
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        border-radius: 50px;
+        transform: scaleY(0);
+        z-index: -1;
+        transition: transform 0.3s ease;
+      }
+      .wrapper ul li a:hover:after {
+        transform: scaleY(1);
+      }
+      .wrapper ul li a:hover {
+        color: #1a73e8;
+      }
+      input[type='checkbox'] {
+        display: none;
+      }
+      .content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: -1;
+        text-align: center;
+        width: 100%;
+        color: #202020;
+      }
+      .content .title {
+        font-size: 40px;
+        font-weight: 700;
+      }
+      .content p {
+        font-size: 35px;
+        font-weight: 600;
+      }
+
+      #active:checked ~ .wrapper ul li a {
+        opacity: 1;
+      }
+      .wrapper ul li a {
+        transition: opacity 1.2s,
+          transform 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+        transform: translateX(100px);
+      }
+      #active:checked ~ .wrapper ul li a {
+        transform: none;
+        transition-timing-function: ease, cubic-bezier(0.1, 1.3, 0.3, 1); /* easeOutBackを緩めた感じ */
+        transition-delay: 0.6s;
+        transform: translateX(-100px);
+      }
+
+      /* CSS for header */
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: darkblue;
+        background-position: top;
+        background-size: auto;
+        height: 100px; /* Set header height */
+        position: fixed; /* Set header to fixed position */
+        top: 0; /* Set header to top of page */
+        left: 0; /* Set header to left of page */
+        right: 0; /* Set header to right of page */
+        z-index: 999; /* Set header to top layer */
+      }
+
+      .nav-items {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: #f5f5f5;
+        margin-right: 20px;
+      }
+
+      .nav-items a {
+        text-decoration: none;
+        color: #000;
+      }
+
+      /* CSS for main element */
+      main {
+        padding-left: 22px;
+      }
+      .intro {
+        left: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        background-size: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+      }
+
+      .intro h1 {
+        font-family: sans-serif;
+        font-size: 60px;
+        color: #fff;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin: 0;
+      }
+
+      .intro p {
+        font-size: 20px;
+        color: #d1d1d1;
+        text-transform: uppercase;
+        margin: 20px 0;
+      }
+
+      .intro button {
+        background-color: #5edaf0;
+        color: #000;
+        padding: 10px 25px;
+        border: none;
+        border-radius: 5px;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.4);
+      }
+
+      #load {
+        position: absolute;
+        width: 600px;
+        height: 36px;
+        left: 50%;
+        top: 40%;
+        margin-left: -300px;
+        overflow: visible;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        cursor: default;
+      }
+
+      #load div {
+        position: absolute;
+        width: 20px;
+        height: 36px;
+        opacity: 0;
+        font-family: Helvetica, Arial, sans-serif;
+        animation: move 2s linear infinite;
+        -o-animation: move 2s linear infinite;
+        -moz-animation: move 2s linear infinite;
+        -webkit-animation: move 2s linear infinite;
+        transform: rotate(180deg);
+        -o-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+        color: #35c4f0;
+      }
+
+      #load div:nth-child(2) {
+        animation-delay: 0.2s;
+        -o-animation-delay: 0.4s;
+        -moz-animation-delay: 0.2s;
+        -webkit-animation-delay: 0.2s;
+      }
+      #load div:nth-child(3) {
+        animation-delay: 0.4s;
+        -o-animation-delay: 0.6s;
+        -webkit-animation-delay: 0.4s;
+        -webkit-animation-delay: 0.4s;
+      }
+      #load div:nth-child(4) {
+        animation-delay: 0.6s;
+        -o-animation-delay: 0.8s;
+        -moz-animation-delay: 0.6s;
+        -webkit-animation-delay: 0.6s;
+      }
+      #load div:nth-child(5) {
+        animation-delay: 0.8s;
+        -o-animation-delay: 1s;
+        -moz-animation-delay: 0.8s;
+        -webkit-animation-delay: 0.8s;
+      }
+      #load div:nth-child(6) {
+        animation-delay: 1s;
+        -o-animation-delay: 1s;
+        -moz-animation-delay: 1s;
+        -webkit-animation-delay: 1s;
+      }
+      #load div:nth-child(7) {
+        animation-delay: 1.2s;
+        -o-animation-delay: 1.2s;
+        -moz-animation-delay: 1.2s;
+        -webkit-animation-delay: 1.2s;
+      }
+
+      @keyframes move {
+        0% {
+          left: 0;
+          opacity: 0;
+        }
+        35% {
+          left: 41%;
+          -moz-transform: rotate(0deg);
+          -webkit-transform: rotate(0deg);
+          -o-transform: rotate(0deg);
+          transform: rotate(0deg);
+          opacity: 1;
+        }
+        65% {
+          left: 59%;
+          -moz-transform: rotate(0deg);
+          -webkit-transform: rotate(0deg);
+          -o-transform: rotate(0deg);
+          transform: rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          left: 100%;
+          -moz-transform: rotate(-180deg);
+          -webkit-transform: rotate(-180deg);
+          -o-transform: rotate(-180deg);
+          transform: rotate(-180deg);
+          opacity: 0;
+        }
+      }
+
+      @-moz-keyframes move {
+        0% {
+          left: 0;
+          opacity: 0;
+        }
+        35% {
+          left: 41%;
+          -moz-transform: rotate(0deg);
+          transform: rotate(0deg);
+          opacity: 1;
+        }
+        65% {
+          left: 59%;
+          -moz-transform: rotate(0deg);
+          transform: rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          left: 100%;
+          -moz-transform: rotate(-180deg);
+          transform: rotate(-180deg);
+          opacity: 0;
+        }
+      }
+
+      @-webkit-keyframes move {
+        0% {
+          left: 0;
+          opacity: 0;
+        }
+        35% {
+          left: 41%;
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+          opacity: 1;
+        }
+        65% {
+          left: 59%;
+          -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          left: 100%;
+          -webkit-transform: rotate(-180deg);
+          transform: rotate(-180deg);
+          opacity: 0;
+        }
+      }
+
+      @-o-keyframes move {
+        0% {
+          left: 0;
+          opacity: 0;
+        }
+        35% {
+          left: 41%;
+          -o-transform: rotate(0deg);
+          transform: rotate(0deg);
+          opacity: 1;
+        }
+        65% {
+          left: 59%;
+          -o-transform: rotate(0deg);
+          transform: rotate(0deg);
+          opacity: 1;
+        }
+        100% {
+          left: 100%;
+          -o-transform: rotate(-180deg);
+          transform: rotate(-180deg);
+          opacity: 0;
+        }
+      }
+
+      /* CSS for footer */
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #302f49;
+        padding: 40px 60px;
+      }
+
+      .footer .copy {
+        color: #fff;
+      }
+
+      .bottom-links {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 40px 0;
+      }
+
+      .bottom-links .links {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0 40px;
+      }
+
+      .bottom-links .links span {
+        font-size: 20px;
+        color: #fff;
+        text-transform: uppercase;
+        margin: 10px 0;
+      }
+
+      .bottom-links .links a {
+        text-decoration: none;
+        color: #a1a1a1;
+        padding: 10px 20px;
+      }
+    </style>
+    <script>
+      function calculateDosage() {
+        let weight = parseFloat(document.getElementById('weight').value);
+        let dose = parseFloat(document.getElementById('dose').value);
+        let times = parseFloat(document.getElementById('times').value);
+        if (weight > 0 && dose > 0 && times > 0) {
+          let result = (weight * dose) / (125 / 5);
+          let final = result / times;
+          document.getElementById('final').value = final;
+          document.getElementById('result').value = result;
+        } else {
+          document.getElementById('final').value =
+            'please enter positive number';
+          document.getElementById('result').value =
+            'please enter positive number';
+        }
+      }
+      function checkPressure() {
+        const pressure = document.getElementById('pressureInput').value;
+        if (pressure > 0) {
+          if (pressure >= 80 && pressure <= 120) {
+            document.getElementById('r').value = 'The pressure is normal.';
+          } else {
+            document.getElementById('r').value = 'The pressure is not normal.';
+          }
+        } else {
+          document.getElementById('r').value = 'please enter positive number';
+        }
+      }
+      function checkGlucose() {
+        const glucose = document.getElementById('glucoseInput').value;
+        if (glucose > 0) {
+          if (glucose >= 70 && glucose <= 130) {
+            document.getElementById('g').value = 'The glucose level is normal.';
+          } else {
+            document.getElementById('g').value =
+              'The glucose level is not normal.';
+          }
+        } else {
+          document.getElementById('g').value = 'please enter positive number';
+        }
+      }
+      onload = () => {
+        const c = setTimeout(() => {
+          document.body.classList.remove('not-loaded');
+          clearTimeout(c);
+        }, 1000);
+      };
+    </script>
+  </head>
+
+  <body>
+    <header class="header">
+      <div id="load">
+        <div>E</div>
+        <div>M</div>
+        <div>O</div>
+        <div>C</div>
+        <div>L</div>
+        <div>E</div>
+        <div>W</div>
+      </div>
+      <input type="checkbox" id="active" />
+      <label for="active" class="menu-btn"><span></span></label>
+      <label for="active" class="close"></label>
+      <div class="wrapper">
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/diseases">Diseases</a></li>
+          <li><a href="/age">Age</a></li>
+          <li><a href="/calculations">Calculations</a></li>
+        </ul>
+      </div>
+
+      <div class="container">
+        <svg viewBox="0 0 960 300">
+          <symbol id="s-text">
+            <text text-anchor="middle" x="50%" y="80%">Health Care</text>
+          </symbol>
+
+          <g class="g-ants">
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+            <use xlink:href="#s-text" class="text-copy"></use>
+          </g>
+        </svg>
+      </div>
+    </header>
+    <br /><br />
+    <br /><br />
+    <main>
+      <div class="intro">
+        <h2>Compute The Daily Dose of Medicine for Babies :</h2>
+        <br />
+        <form>
+          <label for="weight">Baby's Weight (in kg):</label>
+          <input
+            type="number"
+            id="weight"
+            name="weight"
+            required=""
+          /><br /><br />
+
+          <label for="dose">Dose of Medicine (in mg/kg):</label>
+          <input type="number" id="dose" name="dose" required="" /><br /><br />
+
+          <label for="dose"
+            >how many times the Baby should take the Medicine per day?</label
+          >
+          <input
+            type="number"
+            id="times"
+            name="times"
+            required=""
+          /><br /><br />
+
+          <button type="button" onclick="calculateDosage()">Calculate</button
+          ><br /><br />
+
+          <label for="result"
+            >Daily Dose:
+            <input
+              type="number"
+              id="result"
+              name="result"
+              readonly=""
+            />mg</label
+          ><br /><br />
+
+          <label for="final"
+            >The Dose in every time:
+            <input type="number" id="final" name="final" readonly="" />mg
+          </label>
+        </form>
+      </div>
+
+      <div class="intro">
+        <h2>Compute The Normal pressure :</h2>
+        <br />
+        <form>
+          <label for="pressureInput">Enter pressure (in mmHg):</label>
+          <input
+            type="number"
+            id="pressureInput"
+            name="pressureInput"
+          /><br /><br />
+          <button type="button" onclick="checkPressure()">Check Pressure</button
+          ><br /><br />
+          <label for="r"
+            >pressure:
+            <input type="text" id="r" name="r" readonly="" />
+          </label>
+        </form>
+      </div>
+
+      <div class="intro">
+        <h2>Compute The Normal diabetes :</h2>
+        <br />
+        <form>
+          <label for="glucoseInput"
+            >Enter glucose level (in mg/dL):
+            <input type="number" id="glucoseInput" name="glucoseInput" /></label
+          ><br /><br />
+          <button type="button" onclick="checkGlucose()">Check Glucose</button
+          ><br /><br />
+          <label for="g"
+            >Glucose: <input type="text" id="g" name="g" readonly="" />
+          </label>
+        </form>
+      </div>
+    </main>
+    <footer class="footer">
+      <div class="copy">© 2023 JU Developers</div>
+      <div class="bottom-links">
+        <div class="links">
+          <span>More Info</span>
+          <a href="#">Home</a>
+          <a href="#">About</a>
+          <a href="#">Contact</a>
+        </div>
+        <div class="links">
+          <span>Social Links</span>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"></a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
