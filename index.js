@@ -36,6 +36,10 @@ app.get('/diseases', diseaseController.index);
 
 app.get('/diseases/:disease', diseaseController.show);
 
+app.get('/menu', (req, res) => {
+  res.render('menu');
+});
+
 app.get('/age', async (req, res) => {
   try {
     let diseases = await Disease.find({});
@@ -47,6 +51,10 @@ app.get('/age', async (req, res) => {
 
 app.get('/calculations', (req, res) => {
   res.render('calculations');
+});
+
+app.get('/about', (req, res) => {
+  res.render('about');
 });
 
 app.listen(PORT, () => {
